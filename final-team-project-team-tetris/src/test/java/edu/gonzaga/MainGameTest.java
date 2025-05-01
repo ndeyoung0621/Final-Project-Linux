@@ -22,21 +22,6 @@ public class MainGameTest {
     }
 
     @Test
-    void buttonPressedDownWorks() {
-        BlockL testBlockL = new BlockL(gridPad.getGridBlocks(), new Point(4, 0));
-        //ensures the block has moved down in all points by checking center
-        BlockL verifyBlock = new BlockL(gridPad.getGridBlocks(), new Point(4, 1));
-        testController.changeTarget(testBlockL);
-        gridPad.addABlock(testBlockL);
-        // Simulate the press of the down key
-        KeyEvent downKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_DOWN, KeyEvent.CHAR_UNDEFINED);
-        testController.keyPressed(downKeyEvent);
-
-        Assertions.assertEquals(testBlockL.getCenter(), verifyBlock.getCenter());
-
-    }
-
-    @Test
     void buttonPressedLeftWorks() {
         BlockL testBlockL = new BlockL(gridPad.getGridBlocks(), new Point(4, 0));
         //ensures the block has moved down in all points by checking center
@@ -80,5 +65,19 @@ public class MainGameTest {
     }
 
     @Test
-    void buttonTurnedCounterClockwiseWorks() {}
+    void buttonTurnedCounterClockwiseWorks() {
+        BlockL testBlockL = new BlockL(gridPad.getGridBlocks(), new Point(4, 0));
+        //ensures the block has rotated by checking center
+        BlockL verifyBlock = new BlockL(gridPad.getGridBlocks(), new Point(4, 0));
+        testController.changeTarget(testBlockL);
+        gridPad.addABlock(testBlockL);
+        // Simulate the press of the down key
+        KeyEvent xKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_X, KeyEvent.CHAR_UNDEFINED);
+        testController.keyPressed(xKeyEvent);
+
+        Assertions.assertEquals(testBlockL.getCenter(), verifyBlock.getCenter());
+    }
+
+
 }
+
