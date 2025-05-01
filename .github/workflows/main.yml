@@ -21,10 +21,12 @@ jobs:
 
       - name: Build and test with Maven
         run: mvn clean verify
+        working-directory: final-team-project-team-tetris
 
       - name: Lint with Checkstyle
         run: |
           mvn checkstyle:checkstyle
+        working-directory: final-team-project-team-tetris
 
       - name: Build Docker image
         run: docker build -t legacy-java-app:latest .
