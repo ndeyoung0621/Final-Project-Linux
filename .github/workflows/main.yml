@@ -1,1 +1,39 @@
+name: CI/CD Pipeline
 
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-test-lint-package:
+    runs-on: [self-hosted, Linux, X64]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Build and test with Maven
+        run: mvn clean verify
+
+      - name: Lint with Checkstyle
+        run: |
+          mvn checkstyle:checkstyle
+
+      - name: Build Docker image
+        run: docker build -t legacy-java-app:latest .
+
+      - name: Save Docker image
+        run: docker save legacy-java-app:latest | gzip > legacy-java-app.tar.gz
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: legacy-java-app
+          path: legacy-java-app.tar.gz
