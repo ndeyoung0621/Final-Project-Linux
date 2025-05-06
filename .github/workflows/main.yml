@@ -38,4 +38,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: legacy-java-app
-          path: legacy-java-app.tar.gz 
+          path: legacy-java-app.tar.gz  
