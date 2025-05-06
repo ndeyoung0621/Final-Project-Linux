@@ -26,7 +26,7 @@ jobs:
       - name: Lint with Checkstyle
         run: |
           mvn checkstyle:checkstyle
-        working-directory: final-team-project-team-tetris
+        working-directory: final-team-project-team-tetris 
 
       - name: Build Docker image
         run: docker build -t legacy-java-app:latest .
